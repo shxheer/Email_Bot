@@ -1,0 +1,1 @@
+This project is going to be a bot, built in Java using Selenium, that can send emails for you. It'll be able to send pre-existing messages to people over multiple different email platforms. This is just a test project to learn Selenium because I realized that using Selenium to build a bot is not ideal. 

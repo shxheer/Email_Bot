@@ -56,10 +56,16 @@ public class bot {
 		GoogleHomePage.getGmail().click();
 	}
 
-	public static void composeEmail(File send) throws InterruptedException{
+	public static void composeEmailFromMessage(String emailSignIn, String passwordSignIn, String message) throws InterruptedException{
+		setStartUrl("https://www.google.com");
+		start();
+		signInGoogle(emailSignIn, passwordSignIn);
+		goToMail();
 		GoogleMailPage p = new GoogleMailPage(driver);
 		Thread.sleep(1500);
 		p.getComposeButton().click();
+		
+		
 		
 		Thread.sleep(1500);
 		p.getTo().sendKeys(recipientAddress);
@@ -67,8 +73,9 @@ public class bot {
 		Thread.sleep(1500);
 		p.getSubject().sendKeys(Message.getSubject());
 		
+		
 		Thread.sleep(9500);
-		p.getMessageField().sendKeys("Hiii");
+		p.getMessageField().sendKeys(message);
 		
 		Thread.sleep(1500);
 		p.getSendButton().click();
@@ -77,13 +84,17 @@ public class bot {
 	}
 	
 	
-	public static void sendGmailFromFile(String emailSignIn, String passwordSignIn, File send) throws InterruptedException{
-		setStartUrl("https://www.google.com");
-		start();
-		signInGoogle(emailSignIn, passwordSignIn);
-		goToMail();
-		composeEmail(send);
-	}
+//	public static void sendGmailFromFile(String emailSignIn, String passwordSignIn, String send) throws InterruptedException{
+//		setStartUrl("https://www.google.com");
+//		start();
+//		signInGoogle(emailSignIn, passwordSignIn);
+//		goToMail();
+//		GoogleMailPage p = new GoogleMailPage(driver);
+//		Thread.sleep(1500);
+//		p.getComposeButton().click();
+//		
+//		
+//	}
 	
 	
 	

@@ -9,9 +9,9 @@ import org.openqa.selenium.support.PageFactory;
 public class GoogleHomePage extends Page {
 	static WebDriver driver;
 	
-	@FindBy(id="lst-ib")
+	@FindBy(xpath="id('lst-ib')")
 	private static WebElement searchBar;
-	@FindBy(id="gb_70")	
+	@FindBy(xpath="id('gb_70')")	
 	private static WebElement signInButton;
 	@FindBy(id="identifierId")
 	private static WebElement emailSlot;

@@ -14,9 +14,9 @@ public class GoogleMailPage extends Page {
 	private static WebElement toField;
 	@FindBy(id= ":nq")
 	private static WebElement subjectField;
-	@FindBy(id = ":ou")
+	@FindBy(id = ":or")
 	private static WebElement messageField;
-	@FindBy(className = "Am Al editable LW-avf")
+	@FindBy(xpath = "id(':1jd')")
 	private static WebElement insertFileButton;
 	@FindBy(id = ":ng")
 	private static WebElement sendButton;
@@ -44,7 +44,7 @@ public class GoogleMailPage extends Page {
 	}
 	
 	public WebElement getMessageField() throws InterruptedException{
-		Thread.sleep(1500);
+		Thread.sleep(2500);
 		return messageField;
 	}
 	

@@ -20,10 +20,18 @@ public class user {
 		bot b = new bot();
 		System.out.println("Do you want to send a message? (Y,N): ");
 		String ans = console.next();
-		if (ans.equalsIgnoreCase("n")) {
+		if (ans.equalsIgnoreCase("N")) {
+			System.out.println("Exiting.");
 			System.exit(1);
+		} else {
+			console.nextLine();
+			System.out.println("Sending email address: ");
+			emailSignIn = console.nextLine();
+			System.out.println("Sending email address password: ");
+			passwordSignIn = console.nextLine();
 		}
-
+		
+		
 		System.out.println("Do you want to send a pre-existing message? (Y,N): ");
 		String ans2 = console.next();
 
@@ -38,11 +46,23 @@ public class user {
 		String ans3 = console.next();
 
 		if (ans3.equalsIgnoreCase("Y")) {
-			System.out.println("Input text: ");
+			System.out.println("Input message text: ");
 			console.nextLine();
-			String input = console.nextLine();
-			System.out.println(input);
-			b.composeEmailFromMessage(emailSignIn, passwordSignIn, input);
+			String message = console.nextLine();
+			System.out.println("Input message recipient: ");
+			String to = console.nextLine(); 
+			//add validation
+			System.out.println("Input message subject: ");
+			String subject = console.nextLine();
+			if(message != null){
+				System.out.println("Do you want to save this message?(Y,N): ");
+				String a = console.nextLine();
+				if(a.equalsIgnoreCase("Y")){
+					
+				}
+			}
+			System.out.println(message);
+			b.composeGmailFromMessage(emailSignIn, passwordSignIn, message, to, subject);
 
 		}
 	}

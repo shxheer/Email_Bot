@@ -44,7 +44,7 @@ public class GoogleMailPage extends Page {
 	}
 	
 	public WebElement getMessageField() throws InterruptedException{
-		Thread.sleep(2500);
+		Thread.sleep(1500);
 		return messageField;
 	}
 	
@@ -57,12 +57,5 @@ public class GoogleMailPage extends Page {
 		Thread.sleep(1500);
 		return sendButton;
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 }

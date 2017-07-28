@@ -61,7 +61,6 @@ public class user {
 					
 				}
 			}
-			System.out.println(message);
 			b.composeGmailFromMessage(emailSignIn, passwordSignIn, message, to, subject);
 
 		}

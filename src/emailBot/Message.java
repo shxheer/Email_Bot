@@ -5,55 +5,56 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Message {
-	
-	private static String subject = "Bot Message"; 
-	private static String header = "Hi, ";
-	private static String content = "Hello!";
-	//TODO Get basic file set up
-	private static String footer = "Love, Bryce";
+	private String emailFrom = "";
+	private String emailFromPassword = "";
+	private String recipient = "";
+	private String subject = "";
+	private String message = "";
 	private static int count = 0;
-	public int id = 0;
-	
-	final private static String botNote = "I'm a bot!";
-	
-	public Message(String subject, String header, String content, String footer){
+
+	public Message(String emailFrom, String emailFromPassword, String recipient, String subject, String message) {
 		count++;
-		id=count;
-		this.header = header;
+		this.emailFrom = emailFrom;
+		this.emailFromPassword = emailFromPassword;
+		this.recipient = recipient;
 		this.subject = subject;
-		this.content = content;
-		this.footer = footer;
+		this.message = message;
 	}
-	
-	
-	public static void setHeader(String inHeader){
-		header = inHeader;
+
+	public String getEmailFromPassword() {
+		return emailFromPassword;
 	}
-	
-	public static String getHeader(){
-		return header;
+
+	public void setEmailFromPassword(String emailFromPassword) {
+		this.emailFromPassword = emailFromPassword;
 	}
-	
-	public static void setFooter(String inFooter){
-		footer = inFooter;
+
+	public String getEmailFrom() {
+		return emailFrom;
 	}
-	
-	public static String getFooter(){
-		return footer;
+
+	public void setEmailFrom(String emailFrom) {
+		this.emailFrom = emailFrom;
 	}
-	
-	public static void setSubject(String inSubject){
-		subject= inSubject;
-	}
-	
-	public static String getSubject(){
+
+	public String getSubject() {
 		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 	
 	public String toString(){
-		return "Subject: "+subject + " Header: "+header+" Content: "+content+" Footer: "+footer;
-		
+		return ("emailFrom: "+ emailFrom + " Recipient: "+ recipient + " Subject: "+ subject + " Message: "+message);
 	}
-	
-	
+
 }

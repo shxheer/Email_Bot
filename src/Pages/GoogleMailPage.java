@@ -20,7 +20,8 @@ public class GoogleMailPage extends Page {
 	private static WebElement insertFileButton;
 	@FindBy(id = ":ng")
 	private static WebElement sendButton;
-	
+	@FindBy(className = "gb_8a gbii")
+	private static WebElement logoutButton;
 	public GoogleMailPage(WebDriver driver){
 		super(driver);
 		driver.get("https://mail.google.com");
@@ -57,5 +58,11 @@ public class GoogleMailPage extends Page {
 		Thread.sleep(1500);
 		return sendButton;
 	}
+	
+	public WebElement getLogoutButton() throws InterruptedException{
+		Thread.sleep(1500);
+		return logoutButton;
+	}
+	
 	
 }

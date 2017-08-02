@@ -2,6 +2,9 @@ package emailBot;
 
 import java.awt.FileDialog;
 import java.awt.Frame;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -10,15 +13,21 @@ import Pages.GoogleHomePage;
 
 public class user {
 
-	private static String emailSignIn = "reinhard.bryce.21@gmail.com";
-	private static String passwordSignIn = "Bleach12";
+	private static String emailSignIn = "";
+	private static String passwordSignIn = "";
 	private static String url = "https://www.google.com";
 	private static String message = "";
 	
+	
+	@SuppressWarnings("resource")
 	public static void main(String[] args) throws InterruptedException, IOException {
-		messageList ml = new messageList();
+		File f = new File("/Users/breinhard/Desktop/Eclipse Workspace/emailBot/src/Logs/oldMessages.txt");
 		Scanner console = new Scanner(System.in);
+		FileWriter writer = new FileWriter(f);
+		BufferedWriter out = new BufferedWriter(writer);
+		
 		bot b = new bot();
+		
 		System.out.println("Do you want to send a message? (Y,N): ");
 		String ans = console.next();
 		if (ans.equalsIgnoreCase("N")) {
@@ -59,20 +68,21 @@ public class user {
 				if(a.equalsIgnoreCase("Y")){
 					System.out.println("Hit add message");
 					messageList.addMessage(m);
+					out.write(m.toString());
 				}
 			}
-			System.out.println("Is this info correct? (Y,N): ");
+			messageList.addMessage(m);
 			messageList.printMessages();
-			console.nextLine();
-			String answer = console.nextLine();
+			System.out.println("Is this info correct? (Y,N): ");
+		
+			String answer = console.next();
 			if(answer.equalsIgnoreCase("N")){
 				System.out.println("Improper input. Exiting.");
 				System.exit(1);
 			}
 			b.composeGmailFromMessage(emailSignIn, passwordSignIn, message, to, subject);
-
+			
 		}
-		
 		
 	}
 

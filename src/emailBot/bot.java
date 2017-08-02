@@ -1,13 +1,20 @@
 package emailBot;
 
 import java.io.File;
+import java.util.logging.Level;
 
+import org.apache.commons.logging.Log;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.LoggingPreferences;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import Pages.GoogleHomePage;
 import Pages.GoogleMailPage;
@@ -15,19 +22,18 @@ import Pages.GoogleMailPage;
 public class bot {
 	
 	//fields
-	private static String recipientAddress = "reinhard.bryce.21@gmail.com";
+	private static Logger log = Logger.getLogger(Log.class.getName());
+	
 	static WebDriver driver;
 	private static String url = "https://www.wikipedia.com";
 	
 	public static void initialize(){
 		System.setProperty("webdriver.chrome.driver", "/Users/breinhard/Desktop/chromedriver");
-		ChromeOptions options = new ChromeOptions();
-		options.addArguments("--start-maximized");
-		driver = new ChromeDriver(options);
-		recipientAddress = "reinhard.bryce.21@gmail.com";
+		driver = new ChromeDriver();
 		driver.get(url);
 		driver.manage().window().maximize();
 		GoogleHomePage p = new GoogleHomePage(driver);
+		log.info("Test");
 	}
 	public static void start(){
 		initialize();
@@ -50,9 +56,11 @@ public class bot {
 		p.getPassword().click();
 		p.getPassword().sendKeys(pass);
 		p.getNextButton2().click();
+		
 	}
 	
 	public static void goToMail() throws InterruptedException{
+		
 		GoogleHomePage.getGmail().click();
 	}
 

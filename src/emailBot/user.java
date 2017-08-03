@@ -4,10 +4,14 @@ import java.awt.FileDialog;
 import java.awt.Frame;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+
 
 import Pages.GoogleHomePage;
 
@@ -16,15 +20,20 @@ public class user {
 	private static String emailSignIn = "";
 	private static String passwordSignIn = "";
 	private static String url = "https://www.google.com";
-	private static String message = "";
+	
 	
 	
 	@SuppressWarnings("resource")
 	public static void main(String[] args) throws InterruptedException, IOException {
-		File f = new File("/Users/breinhard/Desktop/Eclipse Workspace/emailBot/src/Logs/oldMessages.txt");
+		
+		File f = new File("oldMessages.txt");
 		Scanner console = new Scanner(System.in);
-		FileWriter writer = new FileWriter(f);
+		FileWriter writer = new FileWriter(f, true);
 		BufferedWriter out = new BufferedWriter(writer);
+		PrintWriter pr = new PrintWriter(out);
+		
+		
+		pr.write("\n");
 		
 		bot b = new bot();
 		
@@ -66,13 +75,15 @@ public class user {
 				System.out.println("Do you want to save this message?(Y,N): ");
 				String a = console.nextLine();
 				if(a.equalsIgnoreCase("Y")){
-					System.out.println("Hit add message");
 					messageList.addMessage(m);
-					out.write(m.toString());
+					pr.write(m.toString());
+					pr.write("\n \n \n");
+					
 				}
 			}
-			messageList.addMessage(m);
-			messageList.printMessages();
+			out.close();
+			pr.close();
+			System.out.println(m.toString());
 			System.out.println("Is this info correct? (Y,N): ");
 		
 			String answer = console.next();
@@ -82,8 +93,14 @@ public class user {
 			}
 			b.composeGmailFromMessage(emailSignIn, passwordSignIn, message, to, subject);
 			
+			
 		}
 		
+	}
+	
+	public static void clearMessageFile() throws FileNotFoundException{
+		PrintWriter p2 = new PrintWriter("oldMessages.txt");
+		p2.close();
 	}
 
 }

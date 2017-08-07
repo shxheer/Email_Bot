@@ -1,7 +1,12 @@
 package emailBot;
 
+import java.awt.*;
 import java.awt.FileDialog;
 import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,7 +16,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
+import javax.swing.JFrame;
 
 import Pages.GoogleHomePage;
 
@@ -20,87 +25,78 @@ public class user {
 	private static String emailSignIn = "";
 	private static String passwordSignIn = "";
 	private static String url = "https://www.google.com";
-	
-	
+	private static Scanner console = new Scanner(System.in);
+	private static JFrame main;
 	
 	@SuppressWarnings("resource")
 	public static void main(String[] args) throws InterruptedException, IOException {
+		main = new JFrame("Email Bot");
 		
+		main.setSize(300, 300);
+		main.setLayout(new GridLayout(4, 2));
+		main.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent windowEvent) {
+				System.exit(0);
+			}
+		});
+
+		Panel controlPanel = new Panel();
+		controlPanel.setLayout(new FlowLayout());
+
+		Button loginButton = new Button();
+		// loginButton.setSize(50,50);
+		loginButton.setLabel("Login to Email");
+		loginButton.setActionCommand("loginButton");
+
+		Button sendEmailButton = new Button();
+		// sendEmailButton.setSize(50,50);
+		sendEmailButton.setLabel("Send Email");
+		sendEmailButton.setActionCommand("sendEmailButton");
+
+		Button cancelButton = new Button();
+		cancelButton.setLabel("Cancel");
+		cancelButton.setActionCommand("cancelButton");
+
+		loginButton.addActionListener(new ButtonClickListener());
+		sendEmailButton.addActionListener(new ButtonClickListener());
+
+		cancelButton.addActionListener(new ButtonClickListener());
+
+		main.add(loginButton, controlPanel);
+		main.add(sendEmailButton);
+		main.add(cancelButton);
+		main.setVisible(true);
+
 		File f = new File("oldMessages.txt");
-		Scanner console = new Scanner(System.in);
 		FileWriter writer = new FileWriter(f, true);
 		BufferedWriter out = new BufferedWriter(writer);
 		PrintWriter pr = new PrintWriter(out);
-		
-		
-		pr.write("\n");
-		
-		bot b = new bot();
-		
-		System.out.println("Do you want to send a message? (Y,N): ");
-		String ans = console.next();
-		if (ans.equalsIgnoreCase("N")) {
-			System.out.println("Exiting.");
-			System.exit(1);
-		} else {
-			console.nextLine();
-			System.out.println("Sending email address: ");
-			emailSignIn = console.nextLine();
-			System.out.println("Sending email address password: ");
-			passwordSignIn = console.nextLine();
-		}
-		
-		System.out.println("Do you want to send a pre-existing message? (Y,N): ");
-		String ans2 = console.next();
-
-		if (ans2.equalsIgnoreCase("Y")) {
-			System.out.println("Hit print messages");
-			messageList.printMessages();
-			//add choosing capability
-		}
-		System.out.println("Send email with input from console? (Y,N): ");
-		String ans3 = console.next();
-
-		if (ans3.equalsIgnoreCase("Y")) {
-			System.out.println("Input message text: ");
-			console.nextLine();
-			String message = console.nextLine();
-			System.out.println("Input message recipient: ");
-			String to = console.nextLine(); 
-			//add validation
-			System.out.println("Input message subject: ");
-			String subject = console.nextLine();
-			Message m = new Message(emailSignIn, passwordSignIn, to, subject, message);
-			if(message != null){
-				System.out.println("Do you want to save this message?(Y,N): ");
-				String a = console.nextLine();
-				if(a.equalsIgnoreCase("Y")){
-					messageList.addMessage(m);
-					pr.write(m.toString());
-					pr.write("\n \n \n");
-					
-				}
-			}
-			out.close();
-			pr.close();
-			System.out.println(m.toString());
-			System.out.println("Is this info correct? (Y,N): ");
-		
-			String answer = console.next();
-			if(answer.equalsIgnoreCase("N")){
-				System.out.println("Improper input. Exiting.");
-				System.exit(1);
-			}
-			b.composeGmailFromMessage(emailSignIn, passwordSignIn, message, to, subject);
-			
-			
-		}
-		
+	
 	}
 	
-	public static void clearMessageFile() throws FileNotFoundException{
+	public static void clearMessageFile() throws FileNotFoundException {
 		PrintWriter p2 = new PrintWriter("oldMessages.txt");
 		p2.close();
 	}
+}
 
+class ButtonClickListener extends JFrame implements ActionListener {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public void actionPerformed(ActionEvent e) {
+		String command = e.getActionCommand();
+		if (command.equals("sendEmailButton")) {
+			System.out.println("sendEmailButton hit.");
+			new sendEmailPage();
+		} else if (command.equals("loginButton")) {
+			System.out.println("Login button hit.");
+		} else {
+			System.out.println("Cancel Button hit. Exiting.");
+			System.exit(1);
+		}
+	}
 }

@@ -35,7 +35,7 @@ public class sendEmailPage extends JFrame {
 		send_email_from_file_button.addActionListener(new ButtonClickListener());
 		
 		Button send_email_from_console_button = new Button("Send email from Console");
-		send_email_from_console_button.setActionCommand("send_email_from_file");
+		send_email_from_console_button.setActionCommand("send_email_from_console");
 		send_email_from_console_button.addActionListener(new ButtonClickListener());
 		
 		
@@ -55,11 +55,11 @@ public class sendEmailPage extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String command = e.getActionCommand();
-			if(command.equals("")){
+			if(command.equals("send_email_from_file")){
 				
-			} else if (command.equals("")){
+			} else if (command.equals("re_send_button")){
 				
-			} else {
+			} else if (command.equals("send_email_from_console")){
 				dispose();
 				new inputPageForConsoleEmail();
 			}

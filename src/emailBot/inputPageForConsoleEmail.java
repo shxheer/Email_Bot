@@ -40,7 +40,7 @@ public class inputPageForConsoleEmail extends JFrame implements ActionListener {
 		Label subjectLabel = new Label("Subject of Message: ");
 		subjectTextField = new TextField(20);
 
-		Label messageLabel = new Label("Message 200 char limit): ");
+		Label messageLabel = new Label("Message (200 char limit): ");
 		messageTextField = new TextField(200);
 
 		Button submitButton = new Button();

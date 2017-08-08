@@ -44,12 +44,10 @@ public class user {
 		controlPanel.setLayout(new FlowLayout());
 
 		Button loginButton = new Button();
-		// loginButton.setSize(50,50);
 		loginButton.setLabel("Login to Email");
 		loginButton.setActionCommand("loginButton");
 
 		Button sendEmailButton = new Button();
-		// sendEmailButton.setSize(50,50);
 		sendEmailButton.setLabel("Send Email");
 		sendEmailButton.setActionCommand("sendEmailButton");
 
@@ -59,7 +57,6 @@ public class user {
 
 		loginButton.addActionListener(new ButtonClickListener());
 		sendEmailButton.addActionListener(new ButtonClickListener());
-
 		cancelButton.addActionListener(new ButtonClickListener());
 
 		main.add(loginButton, controlPanel);
@@ -90,10 +87,10 @@ class ButtonClickListener extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
 		if (command.equals("sendEmailButton")) {
-			System.out.println("sendEmailButton hit.");
 			new sendEmailPage();
 		} else if (command.equals("loginButton")) {
-			System.out.println("Login button hit.");
+			new loginPage();
+		
 		} else {
 			System.out.println("Cancel Button hit. Exiting.");
 			System.exit(1);

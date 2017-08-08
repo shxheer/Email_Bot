@@ -49,6 +49,8 @@ public class bot {
 	}
 	
 	public static void signInGoogle(String user, String pass) throws InterruptedException{
+		setStartUrl("https://www.google.com");
+		start();
 		GoogleHomePage p = new GoogleHomePage(driver);
 		p.getSignIn().click();
 		p.getEmail().sendKeys(user);

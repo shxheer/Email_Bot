@@ -8,21 +8,23 @@ import java.util.Scanner;
 import javax.swing.JFrame;
 
 public class inputPageForConsoleEmail extends JFrame implements ActionListener {
-	//Info needed to send a message
+	// Info needed to send a message
 	private static String emailSignIn = "";
 	private static String passwordSignIn = "";
 	private static String recipient = "";
 	private static String subject = "";
 	private static String message = "";
 
-	//TextField fields
+	// TextField fields
 	private static TextField sendingEmailTextField;
 	private static TextField sendingEmailPassowrdTextField;
 	private static TextField recipientTextField;
 	private static TextField subjectTextField;
 	private static TextField messageTextField;
-	
 
+	/*
+	 * GUI page for sending an email from console. Pretty self-explanatory.
+	 */
 	public inputPageForConsoleEmail() {
 		super("Input page");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,7 +64,52 @@ public class inputPageForConsoleEmail extends JFrame implements ActionListener {
 		pack();
 		setSize(300, 300);
 		setVisible(true);
+	}
 
+	/*
+	 * Sets the fields so they can be accessed by other classes. Takes info from
+	 * TextFields.
+	 */
+	private static void setFields() {
+		setEmailSignIn(sendingEmailTextField.getText());
+		setPasswordSignIn(sendingEmailPassowrdTextField.getText());
+		setRecipientAddress(recipientTextField.getText());
+		setSubject(subjectTextField.getText());
+		setMessage(messageTextField.getText());
+	}
+
+	/*
+	 * Action performed method for the submit button. Calls
+	 * composeGmailFromMessage method from the bot class.
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String cmd = e.getActionCommand();
+		if (cmd.equals("submitButton")) {
+			inputPageForConsoleEmail.setFields();
+			try {
+				bot.composeGmailFromMessage(emailSignIn, passwordSignIn, message, recipient, subject);
+				dispose();
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
+
+	public static String getSubject() {
+		return subject;
+	}
+
+	public static void setSubject(String subject) {
+		inputPageForConsoleEmail.subject = subject;
+	}
+
+	public static String getMessage() {
+		return message;
+	}
+
+	public static void setMessage(String message) {
+		inputPageForConsoleEmail.message = message;
 	}
 
 	public static String getEmailSignIn() {
@@ -87,47 +134,6 @@ public class inputPageForConsoleEmail extends JFrame implements ActionListener {
 
 	public static void setRecipientAddress(String recipientAddress) {
 		inputPageForConsoleEmail.recipient = recipientAddress;
-	}
-
-	private static void setFields() {
-		setEmailSignIn(sendingEmailTextField.getText());
-		setPasswordSignIn(sendingEmailPassowrdTextField.getText());
-		setRecipientAddress(recipientTextField.getText());
-		setSubject(subjectTextField.getText());
-		setMessage(messageTextField.getText());
-
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		String cmd = e.getActionCommand();
-
-		if (cmd.equals("submitButton")) {
-			inputPageForConsoleEmail.setFields();
-			try {
-				bot.composeGmailFromMessage(emailSignIn, passwordSignIn, message, recipient, subject);
-				dispose();
-			} catch (InterruptedException e1) {
-				
-				e1.printStackTrace();
-			}
-		}
-	}
-
-	public static String getSubject() {
-		return subject;
-	}
-
-	public static void setSubject(String subject) {
-		inputPageForConsoleEmail.subject = subject;
-	}
-
-	public static String getMessage() {
-		return message;
-	}
-
-	public static void setMessage(String message) {
-		inputPageForConsoleEmail.message = message;
 	}
 
 }

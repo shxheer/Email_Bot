@@ -1,8 +1,6 @@
 package emailBot;
 
 import java.awt.*;
-import java.awt.FileDialog;
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -13,25 +11,16 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Scanner;
-
 import javax.swing.JFrame;
 
-import Pages.GoogleHomePage;
-
 public class user {
-
-	private static String emailSignIn = "";
-	private static String passwordSignIn = "";
-	private static String url = "https://www.google.com";
-	private static Scanner console = new Scanner(System.in);
+	// Fields
 	private static JFrame main;
-	
+
 	@SuppressWarnings("resource")
 	public static void main(String[] args) throws InterruptedException, IOException {
+
 		main = new JFrame("Email Bot");
-		
 		main.setSize(300, 300);
 		main.setLayout(new GridLayout(4, 2));
 		main.addWindowListener(new WindowAdapter() {
@@ -64,25 +53,24 @@ public class user {
 		main.add(cancelButton);
 		main.setVisible(true);
 
-		File f = new File("oldMessages.txt");
-		FileWriter writer = new FileWriter(f, true);
-		BufferedWriter out = new BufferedWriter(writer);
-		PrintWriter pr = new PrintWriter(out);
-	
+		// File f = new File("oldMessages.txt");
+		// FileWriter writer = new FileWriter(f, true);
+		// BufferedWriter out = new BufferedWriter(writer);
+		// PrintWriter pr = new PrintWriter(out);
+
 	}
-	
+
 	public static void clearMessageFile() throws FileNotFoundException {
 		PrintWriter p2 = new PrintWriter("oldMessages.txt");
 		p2.close();
 	}
 }
 
+/*
+ * Class to define what happens based on which button is clicked.
+ */
+@SuppressWarnings("serial")
 class ButtonClickListener extends JFrame implements ActionListener {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
@@ -90,7 +78,6 @@ class ButtonClickListener extends JFrame implements ActionListener {
 			new sendEmailPage();
 		} else if (command.equals("loginButton")) {
 			new loginPage();
-		
 		} else {
 			System.out.println("Cancel Button hit. Exiting.");
 			System.exit(1);
